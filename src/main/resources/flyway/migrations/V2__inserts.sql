@@ -1,9 +1,9 @@
-INSERT INTO gender (ID, gender)
+INSERT INTO gender (id, gender)
 VALUES
     (1, 'male'),
     (2, 'female');
 
-INSERT INTO payment_status (ID, status)
+INSERT INTO payment_status (id, status)
 VALUES
     (1, 'unpaid'),
     (2, 'paid'),
@@ -12,7 +12,7 @@ VALUES
     (5, 'refunding'),
     (6, 'refunded');
 
-INSERT INTO order_status (ID, status)
+INSERT INTO order_status (id, status)
 VALUES
     (1, 'new'),
     (2, 'payment received'),
@@ -22,7 +22,7 @@ VALUES
     (6, 'closed'),
     (7, 'canceled');
 
-INSERT INTO city (ID, name, country)
+INSERT INTO city (id, name, country)
 VALUES
     (1, 'Minsk', 'Belarus'),
     (2, 'Saint-Petersburg', 'Russia'),
@@ -32,7 +32,7 @@ VALUES
     (6, 'Berlin', 'Germany');
 
 
-INSERT INTO passenger (ID, first_name, last_name, date_of_birth, gender_id, email, address)
+INSERT INTO passenger (id, first_name, last_name, date_of_birth, gender_id, email, address)
 VALUES
     (1, 'Ivan', 'Ivanov', '1956-01-01', 1, 'test@mail.ru', 'Minsk'),
     (2, 'Petr', 'Petrov', '1980-02-02', 1, 'email@mail.ru', 'Brest'),
@@ -40,12 +40,12 @@ VALUES
     (4, 'Anna', 'Karenina', '2000-04-04', 2, 'mail@yandex.ru', 'Homel'),
     (5, 'Fedor', 'Fedorov', '1985-05-05', 1, 'mail@mail.ru', 'Vitebsk');
 
-INSERT INTO plane (ID, manufacturer, model, seats)
+INSERT INTO plane (id, manufacturer, model, seats)
 VALUES
     (1, 'Boeing', 'Boeing 727', '105'),
     (2, 'Boeing', 'Boeing 787', '305');
 
-INSERT INTO staff (ID, first_name, last_name, date_of_birth, gender_id, title)
+INSERT INTO staff (id, first_name, last_name, date_of_birth, gender_id, title)
 VALUES
     (1, 'John', 'Pilot', '1960-06-06', 1, 'captain'),
     (2, 'Vladislav', 'Pilot1', '1961-07-07', 1, 'first officer'),
@@ -54,7 +54,7 @@ VALUES
     (5, 'Veronica', 'Stewardess', '1985-10-10', 2, 'stewardess'),
     (6, 'Rick', 'Steward', '1990-11-11', 1, 'steward');
 
-INSERT INTO aircrew (ID, staff_id, plane_id)
+INSERT INTO aircrew (id, staff_id, plane_id)
 VALUES
     (1, 1, 1),
     (2, 2, 1),
@@ -63,29 +63,29 @@ VALUES
     (5, 5, 1),
     (6, 6, 1);
 
-INSERT INTO route (ID, departure_city_id, departure_date_time, arrival_city_id, arrival_date_time)
+INSERT INTO route (id, departure_city_id, departure_date_time, arrival_city_id, arrival_date_time)
 VALUES
     (1, 1, '2023-03-22 12-44-00', 3, '2023-03-22 14-00-00'),
     (2, 1, '2023-03-24 10-00-00', 4, '2023-03-24 16-00-00');
 
-INSERT INTO plane_route (ID, plane_id, route_id)
+INSERT INTO plane_route (id, plane_id, route_id)
 VALUES
     (1, 1, 1),
     (2, 1, 2);
 
-INSERT INTO orders (ID, order_status_id, passenger_id, plane_id, route_id)
+INSERT INTO orders (id, order_status_id, passenger_id, plane_id, route_id)
 VALUES
     (1, 2, 1, 1, 1),
     (2, 5, 2, 2, 2),
     (3, 1, 3, 1, 1);
 
-INSERT INTO payment (ID, order_id, payment_status_id)
+INSERT INTO payment (id, order_id, payment_status_id)
 VALUES
     (1, 1, 2),
     (2, 2, 2),
     (3, 3, 1);
 
-INSERT INTO ticket (ID, order_id)
+INSERT INTO ticket (id, order_id)
 VALUES
     (1, 1),
     (2, 2),

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderStatus {
 
-    private Integer ID;
+    private Integer id;
     private String status;
 
 }

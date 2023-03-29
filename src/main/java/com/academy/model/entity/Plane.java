@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Plane {
 
-    private Integer ID;
+    private Integer id;
     private String manufacturer;
     private String model;
     private String seats;

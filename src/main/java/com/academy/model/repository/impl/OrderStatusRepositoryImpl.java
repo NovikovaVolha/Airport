@@ -2,7 +2,6 @@ package com.academy.model.repository.impl;
 
 import com.academy.model.DataSourceManager;
 import com.academy.model.entity.OrderStatus;
-import com.academy.model.entity.Plane;
 import com.academy.model.repository.OrderStatusRepository;
 
 import java.sql.SQLException;
@@ -30,7 +29,7 @@ public class OrderStatusRepositoryImpl implements OrderStatusRepository {
     public void update(OrderStatus orderStatus) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "UPDATE order_status SET status = ? WHERE ID = ?";
+        var query = "UPDATE order_status SET status = ? WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, orderStatus.getStatus());
@@ -45,10 +44,10 @@ public class OrderStatusRepositoryImpl implements OrderStatusRepository {
     public void delete(OrderStatus orderStatus) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "DELETE FROM order_status WHERE ID = ?";
+        var query = "DELETE FROM order_status WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, orderStatus.getID());
+            preparedStatement.setInt(1, orderStatus.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -70,7 +69,7 @@ public class OrderStatusRepositoryImpl implements OrderStatusRepository {
 
             while (resultSet.next()) {
                 var orderStatus = OrderStatus.builder()
-                        .ID(resultSet.getInt("ID"))
+                        .id(resultSet.getInt("id"))
                         .status(resultSet.getString("status"))
                         .build();
 
@@ -84,12 +83,12 @@ public class OrderStatusRepositoryImpl implements OrderStatusRepository {
     }
 
     @Override
-    public OrderStatus findById(Integer ID) {
+    public OrderStatus findById(Integer id) {
         var orderStatus = OrderStatus.builder();
 
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "SELECT * FROM order_status WHERE ID = ?";
+        var query = "SELECT * FROM order_status WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
 
@@ -97,7 +96,7 @@ public class OrderStatusRepositoryImpl implements OrderStatusRepository {
 
             if (resultSet.next()) {
                 orderStatus
-                        .ID(resultSet.getInt("ID"))
+                        .id(resultSet.getInt("id"))
                         .status(resultSet.getString("status"))
                         .build();
             }

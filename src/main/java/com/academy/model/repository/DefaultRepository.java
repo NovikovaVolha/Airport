@@ -12,6 +12,6 @@ public interface DefaultRepository<T, I> {
 
     List<T> findAll();
 
-    T findById(I ID);
+    T findById(I id);
 
 }

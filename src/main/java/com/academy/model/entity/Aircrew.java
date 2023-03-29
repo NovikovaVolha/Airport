@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Aircrew {
 
-    private Integer ID;
-    private String staffID;
-    private String planeID;
+    private Integer id;
+    private String staffId;
+    private String planeId;
 
 }

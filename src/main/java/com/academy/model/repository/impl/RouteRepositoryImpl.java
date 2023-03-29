@@ -17,9 +17,9 @@ public class RouteRepositoryImpl implements RouteRepository {
         var query = "INSERT INTO route (departure_city_id, departure_date_time, arrival_city_id, arrival_date_time) VALUES (?, ?, ?, ?)";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, route.getDepartureCity().getID());
+            preparedStatement.setInt(1, route.getDepartureCity().getId());
             preparedStatement.setTimestamp(2, route.getDepartureDateTime());
-            preparedStatement.setInt(3, route.getArrivalCity().getID());
+            preparedStatement.setInt(3, route.getArrivalCity().getId());
             preparedStatement.setTimestamp(4, route.getArrivalDateTime());
 
             preparedStatement.execute();
@@ -32,14 +32,14 @@ public class RouteRepositoryImpl implements RouteRepository {
     public void update(Route route) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "UPDATE route SET departure_city_id = ?, departure_date_time = ?, arrival_city_id = ?, arrival_date_time = ? WHERE ID = ?";
+        var query = "UPDATE route SET departure_city_id = ?, departure_date_time = ?, arrival_city_id = ?, arrival_date_time = ? WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, route.getDepartureCity().getID());
+            preparedStatement.setInt(1, route.getDepartureCity().getId());
             preparedStatement.setTimestamp(2, route.getDepartureDateTime());
-            preparedStatement.setInt(3, route.getArrivalCity().getID());
+            preparedStatement.setInt(3, route.getArrivalCity().getId());
             preparedStatement.setTimestamp(4, route.getArrivalDateTime());
-            preparedStatement.setInt(5, route.getID());
+            preparedStatement.setInt(5, route.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -51,10 +51,10 @@ public class RouteRepositoryImpl implements RouteRepository {
     public void delete(Route route) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "DELETE FROM route WHERE ID = ?";
+        var query = "DELETE FROM route WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, route.getID());
+            preparedStatement.setInt(1, route.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -68,12 +68,12 @@ public class RouteRepositoryImpl implements RouteRepository {
 
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "SELECT r.ID AS route_ID, cD.name AS departure_city, " +
+        var query = "SELECT r.id AS route_id, cD.name AS departure_city, " +
                 "cD.country, departure_date_time, " +
                 "cA.name AS arrival_city, cA.country, arrival_date_time " +
                 "FROM route AS r " +
-                "JOIN city AS cD ON r.departure_city_id = cD.ID " +
-                "JOIN city AS cA ON r.arrival_city_id = cA.ID";
+                "JOIN city AS cD ON r.departure_city_id = cD.id " +
+                "JOIN city AS cA ON r.arrival_city_id = cA.id";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
 
@@ -91,7 +91,7 @@ public class RouteRepositoryImpl implements RouteRepository {
                         .build();
 
                 var route = Route.builder()
-                        .ID(resultSet.getInt("route_ID"))
+                        .id(resultSet.getInt("route_id"))
                         .departureCity(departureCity)
                         .departureDateTime(resultSet.getTimestamp("departure_date_time"))
                         .arrivalCity(arrivalCity)
@@ -108,21 +108,21 @@ public class RouteRepositoryImpl implements RouteRepository {
     }
 
     @Override
-    public Route findById(Integer ID) {
+    public Route findById(Integer id) {
         var route = Route.builder();
 
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "SELECT r.ID AS route_ID, cD.name AS departure_city, " +
+        var query = "SELECT r.id AS route_id, cD.name AS departure_city, " +
                 "cD.country, departure_date_time, " +
                 "cA.name AS arrival_city, cA.country, arrival_date_time " +
                 "FROM route AS r " +
-                "JOIN city AS cD ON r.departure_city_id = cD.ID " +
-                "JOIN city AS cA ON r.arrival_city_id = cA.ID " +
-                "WHERE r.ID = ?";
+                "JOIN city AS cD ON r.departure_city_id = cD.id " +
+                "JOIN city AS cA ON r.arrival_city_id = cA.id " +
+                "WHERE r.id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, ID);
+            preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
 
@@ -138,7 +138,7 @@ public class RouteRepositoryImpl implements RouteRepository {
                         .build();
 
                 route
-                        .ID(resultSet.getInt("route_ID"))
+                        .id(resultSet.getInt("route_id"))
                         .departureCity(departureCity)
                         .departureDateTime(resultSet.getTimestamp("departure_date_time"))
                         .arrivalCity(arrivalCity)

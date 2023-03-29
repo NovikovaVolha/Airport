@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PaymentStatus {
 
-    private Integer ID;
+    private Integer id;
     private String status;
 
 }

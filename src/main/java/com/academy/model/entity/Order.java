@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Order {
 
-    private Integer ID;
+    private Integer id;
     private OrderStatus orderStatus;
     private Passenger passenger;
     private Plane plane;

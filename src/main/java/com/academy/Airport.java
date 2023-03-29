@@ -18,7 +18,7 @@ public class Airport {
         var orders = orderRepository.findAll();
 
         for (Order order : orders) {
-            System.out.println("Order " + order.getID() + ":\norder status: " + order.getOrderStatus().getStatus() + ", passenger: " +
+            System.out.println("Order " + order.getId() + ":\norder status: " + order.getOrderStatus().getStatus() + ", passenger: " +
                     order.getPassenger().getFirstName() + " " + order.getPassenger().getLastName() + ", plane: " +
                     order.getPlane().getModel() + ", departure: " +
                     order.getRoute().getDepartureCity().getName() + ", " + order.getRoute().getDepartureDateTime() + ", arrival: " +

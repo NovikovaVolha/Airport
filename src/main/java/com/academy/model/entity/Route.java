@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Route {
 
-    private Integer ID;
+    private Integer id;
     private City departureCity;
     private Timestamp departureDateTime;
     private City arrivalCity;

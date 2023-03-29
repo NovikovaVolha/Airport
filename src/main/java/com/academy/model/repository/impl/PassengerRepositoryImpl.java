@@ -19,7 +19,7 @@ public class PassengerRepositoryImpl implements PassengerRepository {
             preparedStatement.setString(1, passenger.getFirstName());
             preparedStatement.setString(2, passenger.getLastName());
             preparedStatement.setDate(3, passenger.getDateOfBirth());
-            preparedStatement.setInt(4, passenger.getGenderID());
+            preparedStatement.setInt(4, passenger.getGenderId());
             preparedStatement.setString(5, passenger.getEmail());
             preparedStatement.setString(6, passenger.getAddress());
 
@@ -33,14 +33,14 @@ public class PassengerRepositoryImpl implements PassengerRepository {
     public void update(Passenger passenger) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "UPDATE passenger SET first_name = ?, last_name = ?, date_of_birth = ?, gender_id = ? WHERE ID = ?";
+        var query = "UPDATE passenger SET first_name = ?, last_name = ?, date_of_birth = ?, gender_id = ? WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, passenger.getFirstName());
             preparedStatement.setString(2, passenger.getLastName());
             preparedStatement.setDate(3, passenger.getDateOfBirth());
-            preparedStatement.setInt(4, passenger.getGenderID());
-            preparedStatement.setInt(5, passenger.getID());
+            preparedStatement.setInt(4, passenger.getGenderId());
+            preparedStatement.setInt(5, passenger.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -52,10 +52,10 @@ public class PassengerRepositoryImpl implements PassengerRepository {
     public void delete(Passenger passenger) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "DELETE FROM passenger WHERE ID = ?";
+        var query = "DELETE FROM passenger WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, passenger.getID());
+            preparedStatement.setInt(1, passenger.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -77,11 +77,11 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
             while (resultSet.next()) {
                 var passenger = Passenger.builder()
-                        .ID(resultSet.getInt("ID"))
+                        .id(resultSet.getInt("id"))
                         .firstName(resultSet.getString("first_name"))
                         .lastName(resultSet.getString("last_name"))
                         .dateOfBirth(resultSet.getDate("date_of_birth"))
-                        .genderID(resultSet.getInt("gender_id"))
+                        .genderId(resultSet.getInt("gender_id"))
                         .email(resultSet.getString("email"))
                         .address(resultSet.getString("address"))
                         .build();
@@ -96,25 +96,25 @@ public class PassengerRepositoryImpl implements PassengerRepository {
     }
 
     @Override
-    public Passenger findById(Integer ID) {
+    public Passenger findById(Integer id) {
         var passenger = Passenger.builder();
 
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "SELECT * FROM passenger WHERE ID = ?";
+        var query = "SELECT * FROM passenger WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, ID);
+            preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 passenger
-                        .ID(resultSet.getInt("ID"))
+                        .id(resultSet.getInt("id"))
                         .firstName(resultSet.getString("first_name"))
                         .lastName(resultSet.getString("last_name"))
                         .dateOfBirth(resultSet.getDate("date_of_birth"))
-                        .genderID(resultSet.getInt("gender_id"))
+                        .genderId(resultSet.getInt("gender_id"))
                         .email(resultSet.getString("email"))
                         .address(resultSet.getString("address"));
             }

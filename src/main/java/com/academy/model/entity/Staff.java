@@ -7,11 +7,11 @@ import java.sql.Date;
 @Data
 public class Staff {
 
-    private Integer ID;
+    private Integer id;
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
-    private Integer genderID;
+    private Integer genderId;
     private String title;
 
 }

@@ -31,13 +31,13 @@ public class PlaneRepositoryImpl implements PlaneRepository {
     public void update(Plane plane) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "UPDATE plane SET manufacturer = ?, model = ?, seats = ? WHERE ID = ?";
+        var query = "UPDATE plane SET manufacturer = ?, model = ?, seats = ? WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, plane.getManufacturer());
             preparedStatement.setString(2, plane.getModel());
             preparedStatement.setString(3, plane.getSeats());
-            preparedStatement.setInt(4, plane.getID());
+            preparedStatement.setInt(4, plane.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -49,10 +49,10 @@ public class PlaneRepositoryImpl implements PlaneRepository {
     public void delete(Plane plane) {
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "DELETE FROM plane WHERE ID = ?";
+        var query = "DELETE FROM plane WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, plane.getID());
+            preparedStatement.setInt(1, plane.getId());
 
             preparedStatement.execute();
         } catch (SQLException ex) {
@@ -74,7 +74,7 @@ public class PlaneRepositoryImpl implements PlaneRepository {
 
             while (resultSet.next()) {
                 var plane = Plane.builder()
-                        .ID(resultSet.getInt("ID"))
+                        .id(resultSet.getInt("id"))
                         .manufacturer(resultSet.getString("manufacturer"))
                         .model(resultSet.getString("model"))
                         .seats(resultSet.getString("seats"))
@@ -90,21 +90,21 @@ public class PlaneRepositoryImpl implements PlaneRepository {
     }
 
     @Override
-    public Plane findById(Integer ID) {
+    public Plane findById(Integer id) {
         var plane = Plane.builder();
 
         var connection = DataSourceManager.getInstance().getConnection();
 
-        var query = "SELECT * FROM plane WHERE ID = ?";
+        var query = "SELECT * FROM plane WHERE id = ?";
 
         try (var preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, ID);
+            preparedStatement.setInt(1, id);
 
             var resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 plane
-                        .ID(resultSet.getInt("ID"))
+                        .id(resultSet.getInt("id"))
                         .manufacturer(resultSet.getString("manufacturer"))
                         .model(resultSet.getString("model"))
                         .seats(resultSet.getString("seats"));
